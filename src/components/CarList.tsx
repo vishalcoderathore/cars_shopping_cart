@@ -5,8 +5,10 @@ import { Car } from '../store/slices/carSlice';
 
 const CarList = (): ReactElement => {
   const dispatch = useDispatch();
-  const cars = useSelector((state: RootState) => {
-    return state.cars.data;
+  const cars = useSelector(({ cars: { data, searchTerm } }: RootState) => {
+    return data.filter(car => {
+      car.name.toLowerCase().includes(searchTerm.toLowerCase());
+    });
   });
 
   const handleCarDelete = useCallback(
