@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction, nanoid } from '@reduxjs/toolkit';
 
-type Car = {
+export type Car = {
   name: string;
   cost: number;
   id: string;
@@ -8,12 +8,12 @@ type Car = {
 
 type CarsState = {
   searchTerm: string;
-  cars: Car[];
+  data: Car[];
 };
 
 const initialState: CarsState = {
   searchTerm: '',
-  cars: [],
+  data: [],
 };
 
 const carSlice = createSlice({
@@ -24,13 +24,13 @@ const carSlice = createSlice({
       state.searchTerm = action.payload;
     },
     addCar(state, action: PayloadAction<Omit<Car, 'id'>>) {
-      state.cars.push({
+      state.data.push({
         ...action.payload,
         id: nanoid(),
       });
     },
     removeCar(state, action: PayloadAction<string>) {
-      state.cars = state.cars.filter(car => car.id !== action.payload);
+      state.data = state.data.filter(car => car.id !== action.payload);
     },
   },
 });

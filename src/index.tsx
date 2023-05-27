@@ -1,6 +1,7 @@
 import { createRoot } from 'react-dom/client';
 import { store } from './store/index.ts';
 import { Provider } from 'react-redux';
+import 'bulma/css/bulma.css';
 import App from './App.tsx';
 import React from 'react';
 import './index.css';

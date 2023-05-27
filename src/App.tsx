@@ -6,10 +6,10 @@ import { ReactElement } from 'react';
 
 const App = (): ReactElement => {
   return (
-    <div>
+    <div className="container is-fluid">
       <CarForm />
-      <CarList />
       <CarSearch />
+      <CarList />
       <CarValue />
     </div>
   );

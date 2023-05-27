@@ -10,6 +10,9 @@ const store = configureStore({
   },
 });
 
+// RootState provides TypeScript with information about the shape of your redux state, which allows it to infer the type of state.form.name.
+export type RootState = ReturnType<typeof store.getState>;
+
 // Export the store
 export { store };
 
