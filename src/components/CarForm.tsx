@@ -15,7 +15,7 @@ const CarForm = (): ReactElement => {
     dispatch(changeName(event.target.value));
   };
   const handleCostChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    dispatch(changeCost(Number(event.target.value) || 0));
+    dispatch(changeCost(parseInt(event.target.value) || 0));
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
@@ -38,11 +38,18 @@ const CarForm = (): ReactElement => {
             <label htmlFor="label" className="label">
               Cost
             </label>
-            <input type="number" className="input is-expanded" value={cost || ''} onChange={handleCostChange} />
+            <input
+              type="number"
+              className="input is-expanded"
+              value={cost > 0 ? cost : ''}
+              onChange={handleCostChange}
+            />
           </div>
         </div>
         <div className="field">
-          <button className="button is-link">Submit</button>
+          <button className="button is-link" disabled={name === '' || cost < 0}>
+            Submit
+          </button>
         </div>
       </form>
     </div>
