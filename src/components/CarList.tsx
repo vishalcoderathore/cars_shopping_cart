@@ -1,18 +1,22 @@
-import { ReactElement, ReactNode, useCallback } from 'react';
+import { ReactElement, ReactNode, useCallback, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, removeCar } from '../store';
 import { Car } from '../store/slices/carSlice';
 
 const CarList = (): ReactElement => {
   const dispatch = useDispatch();
-  const cars = useSelector(({ cars: { data, searchTerm } }: RootState) => {
+  const data = useSelector((state: RootState) => state.cars.data);
+  const searchTerm = useSelector((state: RootState) => state.cars.searchTerm);
+
+  // Uses the useMemo hook to memoize the cars array
+  const cars = useMemo(() => {
     if (searchTerm.trim() === '') {
       return data; // Return the original data when searchTerm is empty
     }
     return data.filter(car => {
       return car.name.toLowerCase().includes(searchTerm.toLowerCase());
     });
-  });
+  }, [data, searchTerm]);
 
   const handleCarDelete = useCallback(
     (car: Car): void => {
